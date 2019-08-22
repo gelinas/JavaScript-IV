@@ -25,6 +25,14 @@ class Instructor extends Person {
     grade(student, subject) {
         console.log(`${student.name} receives a perfect score on ${subject}`)
     }
+    pointGrade(student) {
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+          }
+        student.grade = student.grade + getRandomInt(-10, 20);
+    }
 }
 
 class Student extends Person {
@@ -33,6 +41,8 @@ class Student extends Person {
         this.previousBackground = studentAttributes.previousBackground;
         this.className = studentAttributes.className;
         this.favSubjects = studentAttributes.favSubjects;
+        //Stretch
+        this.grade = studentAttributes.grade;
     }
     listsSubjects() {
         this.favSubjects.forEach(element => {
@@ -44,6 +54,13 @@ class Student extends Person {
     }
     sprintChallenge(subject) {
         console.log(`${this.name} has begun sprint challenge on ${subject}`);
+    }
+    graduate() {
+        if (this.grade > 70) {
+            console.log(`${this.name} has graduated!`);
+        } else {
+            console.log(`${this.name} needs to get back to work!`);
+        }
     }
 }
 
@@ -80,7 +97,9 @@ const testBob = new Student({
     age: 32,
     previousBackground: 'Builder',
     className: 'Web23',
-    favSubjects: ['React', 'CSS PRE-PROCESSING', 'HTML']
+    favSubjects: ['React', 'CSS PRE-PROCESSING', 'HTML'],
+    // Stretch
+    grade: 50
 });
 
 console.log(testBob);
@@ -122,3 +141,19 @@ testDevon.demo('IHOP');
 testDevon.grade(testBob, 'Python');
 testDevon.standUp('#web23_devon');
 testDevon.debugsCode(testBob, 'JavaScript');
+
+// testing stretch
+
+console.log(testBob.grade);
+testDevon.pointGrade(testBob);
+console.log(testBob.grade);
+testDevon.pointGrade(testBob);
+console.log(testBob.grade);
+testBob.graduate();
+
+console.log(testBob.grade);
+testDevon.pointGrade(testBob);
+console.log(testBob.grade);
+testDevon.pointGrade(testBob);
+console.log(testBob.grade);
+testBob.graduate();
